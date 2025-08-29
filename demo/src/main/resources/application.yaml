@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: Springboot Projesi Olusturma
+
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+server:
+  port: 8081
