@@ -3,6 +3,8 @@ package com.betul.demo.controller;
 import com.betul.demo.entity.Employee;
 import com.betul.demo.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class EmployeeController {
         return employeeService.save(employee);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Employee> getAll(){
         return employeeService.findAll();
     }
@@ -37,6 +39,31 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         employeeService.delete(id);
+    }
+
+    @GetMapping("/search")
+    public List<Employee> searchByName(@RequestParam String name){
+        return employeeService.searchByName(name);
+    }
+
+    @GetMapping("/by-department")
+    public List<Employee> searchByDepartment(@RequestParam String department){
+        return employeeService.searchByDepartment(department);
+    }
+
+    @GetMapping("/search/by-salary")
+    public List<Employee> searchBySalary(@RequestParam Integer amount){
+        return employeeService.findBySalaryGreaterThan(amount);
+    }
+
+    @GetMapping("/search/native-department")
+    public List<Employee> searchNative(@RequestParam String dept){
+        return employeeService.findByDepartmentNative(dept);
+    }
+
+    @GetMapping("/paged")
+    public Page<Employee> getEmployees(Pageable pageable){
+        return employeeService.getAllEmployees(pageable);
     }
 
 

@@ -1,5 +1,6 @@
 package com.betul.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,4 +22,8 @@ public class Employee {
     private String email;
 
     private Integer salary;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Department department;
 }
